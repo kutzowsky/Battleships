@@ -11,13 +11,16 @@ namespace Battleships.Core
     public class Board : IBoard
     {
         public IField[,] Fields { get; private set; }
-        public ICollection<Ship> Ships { get; private set; }
+        public ICollection<IShip> Ships { get; private set; }
 
-        public Board()
+        public Board(IField[,] fields, ICollection<IShip> ships)
         {
-            Fields = new Field[10,10];
-            Ships = new List<Ship>();
+            Fields = fields;
+            Ships = ships;
+        }
 
+        public Board() : this(new Field[10, 10], new List<IShip>())
+        {
             for(var i=0; i < 10; i++)
             {
                 for (var j = 0; j < 10; j++)
@@ -27,7 +30,7 @@ namespace Battleships.Core
             }
         }
 
-        public bool CanPlace(Ship ship)
+        public bool CanPlace(IShip ship)
         {
             var x = ship.StartingPoint.X;
             var y = ship.StartingPoint.Y;
@@ -45,7 +48,7 @@ namespace Battleships.Core
             return true;
         }
 
-        public void Place(Ship ship)
+        public void Place(IShip ship)
         {
             if (!CanPlace(ship)) throw new InvalidOperationException("This ship cannot be placed");
 

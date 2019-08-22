@@ -7,10 +7,10 @@ namespace Battleships.Core.Interfaces
     public interface IBoard
     {
         IField[,] Fields { get; }
-        ICollection<Ship> Ships { get; }
+        ICollection<IShip> Ships { get; }
 
-        bool CanPlace(Ship ship);
-        void Place(Ship ship);
+        bool CanPlace(IShip ship);
+        void Place(IShip ship);
         ShootResult Shoot(Point shot);
     }
 }

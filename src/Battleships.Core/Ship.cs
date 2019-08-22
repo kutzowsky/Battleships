@@ -1,10 +1,11 @@
 ﻿using Battleships.Core.Enums;
+using Battleships.Core.Interfaces;
 using System;
 using System.Drawing;
 
 namespace Battleships.Core
 {
-    public class Ship
+    public class Ship : IShip
     {
         public Guid Id { get; private set; }
         public string Name { get; set; }

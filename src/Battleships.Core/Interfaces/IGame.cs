@@ -1,12 +1,13 @@
 ﻿namespace Battleships.Core.Interfaces
 {
-    interface IGame
+    public interface IGame
     {
-        bool Active { get;}
-
         IBoard Board { get; }
 
+        bool Active { get; }
+
         void Start();
+
         void Shoot(string coordinates);
 
         IField [,] GetBoardFields();

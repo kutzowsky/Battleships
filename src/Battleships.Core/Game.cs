@@ -1,12 +1,23 @@
 ﻿using Battleships.Core.Interfaces;
+using System.Linq;
 
 namespace Battleships.Core
 {
-    class Game : IGame
+    public class Game : IGame
     {
-        public bool Active { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public IBoard Board { get; } 
 
-        public IBoard Board => throw new System.NotImplementedException();
+        public bool Active {
+            get
+            {
+                return Board.Ships.Any(ship => ship.Destroyed == false);
+            }
+        }
+
+        public Game(IBoard board)
+        {
+            Board = board;
+        }
 
         public void Start()
         {
