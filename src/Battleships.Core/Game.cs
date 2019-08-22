@@ -14,6 +14,14 @@ namespace Battleships.Core
             }
         }
 
+        public IField[,] BoardFields
+        {
+            get
+            {
+                return Board.Fields;
+            }
+        }
+
         public Game(IBoard board)
         {
             Board = board;
@@ -25,11 +33,6 @@ namespace Battleships.Core
         }
 
         public void Shoot(string coordinates)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IField[,] GetBoardFields()
         {
             throw new System.NotImplementedException();
         }

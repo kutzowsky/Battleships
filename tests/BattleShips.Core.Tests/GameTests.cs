@@ -10,14 +10,15 @@ namespace BattleShips.Core.Tests
     public class GameTests
     {
         IGame _game;
+        IField[,] _fields;
         List<IShip> _ships = new List<IShip>();
 
         public GameTests()
         {
-            var fields = new Field[10, 10];
+            _fields = new Field[10, 10];
             _ships = new List<IShip>();
 
-            var board = new Board(fields, _ships);
+            var board = new Board(_fields, _ships);
             _game = new Game(board);
         }
 
@@ -49,6 +50,12 @@ namespace BattleShips.Core.Tests
             _ships.Add(secondDestroyedShipMock.Object);
 
             _game.Active.Should().BeFalse();
+        }
+
+        [Fact]
+        public void BoardFields_WhenCalled_ShouldReturnBoardFields()
+        {
+            _game.BoardFields.Should().BeEquivalentTo(_fields);
         }
     }
 }

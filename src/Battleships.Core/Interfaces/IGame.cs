@@ -6,10 +6,11 @@
 
         bool Active { get; }
 
+        IField[,] BoardFields { get; }
+
         void Start();
 
         void Shoot(string coordinates);
 
-        IField [,] GetBoardFields();
     }
 }
