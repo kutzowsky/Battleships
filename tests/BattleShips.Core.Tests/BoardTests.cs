@@ -32,12 +32,7 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void Place_WhenCalledWithHorizontalShip_ShouldMarkPinsCorrectly()
         {
-            var ship = new Ship
-            {
-                Length = 4,
-                StartingPoint = new Point(0, 0),
-                Orientation = ShipOrientation.HORIZONTAL
-            };
+            var ship = BuildSampleHorizontalShip();
 
             _board.Place(ship);
 
@@ -50,12 +45,7 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void Place_WhenCalledWithVerticalShip_ShouldMarkPinsCorrectly()
         {
-            var ship = new Ship
-            {
-                Length = 5,
-                StartingPoint = new Point(5, 1),
-                Orientation = ShipOrientation.VERTICAL
-            };
+            var ship = BuildSampleVerticalShip();
 
             _board.Place(ship);
 
@@ -69,12 +59,7 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void Place_WhenCalled_ShouldSetShipIdOnAllShipFields()
         {
-            var ship = new Ship
-            {
-                Length = 4,
-                StartingPoint = new Point(0, 0),
-                Orientation = ShipOrientation.HORIZONTAL
-            };
+            var ship = BuildSampleHorizontalShip();
 
             _board.Place(ship);
 
@@ -85,14 +70,9 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
-        public void Shoot_OnHit_ShouldMarkPinCorrectly()
+        public void Shoot_WhenShipIsHit_ShouldMarkPinCorrectly()
         {
-            var ship = new Ship
-            {
-                Length = 4,
-                StartingPoint = new Point(0, 0),
-                Orientation = ShipOrientation.HORIZONTAL
-            };
+            var ship = BuildSampleHorizontalShip();
 
             var shotX = 2;
             var shotY = 0;
@@ -106,14 +86,9 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
-        public void Shoot_OnMiss_ShouldMarkPinCorrectly()
+        public void Shoot_WhenShipIsMissed_ShouldMarkPinCorrectly()
         {
-            var ship = new Ship
-            {
-                Length = 4,
-                StartingPoint = new Point(0, 0),
-                Orientation = ShipOrientation.HORIZONTAL
-            };
+            var ship = BuildSampleHorizontalShip();
 
             var shotX = 1;
             var shotY = 2;
@@ -124,6 +99,72 @@ namespace BattleShips.Core.Tests
             _board.Shoot(shot);
 
             _board.Fields[shotX, shotY].State.Should().Be(FieldState.MISS);
+        }
+
+        [Fact]
+        public void CanPlace_WhenCanPlaceShip_ReturnTrue()
+        {
+            var firstShip = BuildSampleHorizontalShip();
+
+            var secondShip = new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(1, 1),
+                Orientation = ShipOrientation.VERTICAL
+            };
+
+            var shotX = 1;
+            var shotY = 2;
+            var shot = new Point(shotX, shotY);
+
+            _board.Place(firstShip);
+
+            var canPlaceShip = _board.CanPlace(secondShip);
+
+            canPlaceShip.Should().BeTrue();
+        }
+
+        [Fact]
+        public void CanPlace_WhenShipsOverlap_ReturnFalse()
+        {
+            var firstShip = BuildSampleHorizontalShip();
+
+            var secondShip = new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(1, 0),
+                Orientation = ShipOrientation.VERTICAL
+            };
+
+            var shotX = 1;
+            var shotY = 2;
+            var shot = new Point(shotX, shotY);
+
+            _board.Place(firstShip);
+
+            var canPlaceShip = _board.CanPlace(secondShip);
+
+            canPlaceShip.Should().BeFalse();
+        }
+
+        private Ship BuildSampleVerticalShip()
+        {
+            return new Ship
+            {
+                Length = 5,
+                StartingPoint = new Point(5, 1),
+                Orientation = ShipOrientation.VERTICAL
+            };
+        }
+
+        private Ship BuildSampleHorizontalShip()
+        {
+            return new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(0, 0),
+                Orientation = ShipOrientation.HORIZONTAL
+            };
         }
     }
 }

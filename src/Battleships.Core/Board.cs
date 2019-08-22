@@ -19,6 +19,24 @@ namespace Battleships.Core
             }
         }
 
+        public bool CanPlace(Ship ship)
+        {
+            var x = ship.StartingPoint.X;
+            var y = ship.StartingPoint.Y;
+
+            for (var i = 0; i < ship.Length; i++)
+            {
+                if (Fields[x, y].State == FieldState.SHIP) return false;
+
+                if (ship.Orientation == ShipOrientation.HORIZONTAL)
+                    x++;
+                else
+                    y++;
+            }
+
+            return true;
+        }
+
         public void Place(Ship ship)
         {
             var x = ship.StartingPoint.X;
