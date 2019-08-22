@@ -1,9 +1,11 @@
 ﻿using Battleships.Core.Enums;
+using Battleships.Core.Interfaces;
 using System;
 
 namespace Battleships.Core
 {
-    public class Field
+    public class Field : IField
+ 
     {
         public Guid ShipId { get;  set; }
         public FieldState State { get; private set; }

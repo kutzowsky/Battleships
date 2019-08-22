@@ -1,6 +1,7 @@
 using System.Drawing;
 using Battleships.Core;
 using Battleships.Core.Enums;
+using Battleships.Core.Interfaces;
 using FluentAssertions;
 using Xunit;
 
@@ -8,7 +9,7 @@ namespace BattleShips.Core.Tests
 {
     public class BoardTests
     {
-        readonly Board _board;
+        readonly IBoard _board;
 
         public BoardTests()
         {

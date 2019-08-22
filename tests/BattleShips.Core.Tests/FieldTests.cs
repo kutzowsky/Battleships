@@ -1,5 +1,6 @@
 ﻿using Battleships.Core;
 using Battleships.Core.Enums;
+using Battleships.Core.Interfaces;
 using FluentAssertions;
 using System;
 using Xunit;
@@ -8,7 +9,7 @@ namespace BattleShips.Core.Tests
 {
     public class FieldTests
     {
-        Field _field;
+        IField _field;
 
         public FieldTests()
         {

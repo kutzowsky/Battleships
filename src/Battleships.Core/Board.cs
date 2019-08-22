@@ -1,4 +1,5 @@
 ﻿using Battleships.Core.Enums;
+using Battleships.Core.Interfaces;
 using Battleships.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -7,10 +8,10 @@ using System.Linq;
 
 namespace Battleships.Core
 {
-    public class Board
+    public class Board : IBoard
     {
-        public Field[,] Fields { get; private set; }
-        public List<Ship> Ships { get; private set; }
+        public IField[,] Fields { get; private set; }
+        public ICollection<Ship> Ships { get; private set; }
 
         public Board()
         {
