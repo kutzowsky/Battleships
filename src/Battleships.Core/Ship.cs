@@ -12,9 +12,16 @@ namespace Battleships.Core
 
         public ShipOrientation Orientation { get; set; }
 
+        public bool Destroyed { get { return Length == 0;  } }
+
         public Ship()
         {
             Id = Guid.NewGuid();
+        }
+
+        public void Hit()
+        {
+            Length--;
         }
     }
 }

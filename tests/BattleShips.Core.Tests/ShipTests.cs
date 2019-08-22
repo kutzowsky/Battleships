@@ -19,5 +19,40 @@ namespace BattleShips.Core.Tests
 
             shipList.Select(ship => ship.Id).Should().OnlyHaveUniqueItems();
         }
+
+        [Fact]
+        public void Hit_WhenCalled_ShouldReduceShipLength()
+        {
+            var ship = new Ship
+            {
+                Length = 4
+            };
+
+            ship.Hit();
+
+            ship.Length.Should().Be(3);
+        }
+
+        [Fact]
+        public void Destroyed_WhenShipLengthIsZero_ShouldReturnTrue()
+        {
+            var ship = new Ship
+            {
+                Length = 0
+            };
+
+            ship.Destroyed.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Destroyed_WhenShipLengthGreaterThanZero_ShouldReturnFalse()
+        {
+            var ship = new Ship
+            {
+                Length = 4
+            };
+
+            ship.Destroyed.Should().BeFalse();
+        }
     }
 }

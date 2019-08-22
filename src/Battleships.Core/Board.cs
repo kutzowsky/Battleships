@@ -62,9 +62,26 @@ namespace Battleships.Core
             }
         }
 
-        public void Shoot(Point shot)
+        public ShootResult Shoot(Point shot)
         {
-            Fields[shot.X, shot.Y].Shoot();
+            var field = Fields[shot.X, shot.Y];
+            var fieldState = field.Shoot();
+
+            var result = new ShootResult();
+            result.State = fieldState;
+
+            if (fieldState == FieldState.HIT)
+            {
+                var shipId = field.ShipId;
+                var ship = Ships.Single(s => s.Id == shipId);
+
+                ship.Hit();
+
+                result.HitShipDestroyed = ship.Destroyed;
+                result.HitShipName = ship.Name;
+            }
+
+            return result;
         }
     }
 }

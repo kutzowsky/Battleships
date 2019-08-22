@@ -97,6 +97,42 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
+        public void Shoot_WhenShipIsHitButNotDestroyed_ShouldReturnCorrectResult()
+        {
+            var ship = BuildSampleHorizontalShip();
+
+            var shotX = 2;
+            var shotY = 0;
+            var shot = new Point(shotX, shotY);
+
+            _board.Place(ship);
+
+            var shootResult = _board.Shoot(shot);
+
+            shootResult.State.Should().Be(FieldState.HIT);
+            shootResult.HitShipName.Should().Be(ship.Name);
+            shootResult.HitShipDestroyed.Should().BeFalse();
+        }
+
+        [Fact]
+        public void Shoot_WhenShipIsHitAndDestroyed_ShouldReturnCorrectResult()
+        {
+            var ship = BuildSampleOneFieldShip();
+
+            var shotX = 0;
+            var shotY = 0;
+            var shot = new Point(shotX, shotY);
+
+            _board.Place(ship);
+
+            var shootResult = _board.Shoot(shot);
+
+            shootResult.State.Should().Be(FieldState.HIT);
+            shootResult.HitShipName.Should().Be(ship.Name);
+            shootResult.HitShipDestroyed.Should().BeTrue();
+        }
+
+        [Fact]
         public void Shoot_WhenShipIsMissed_ShouldMarkPinCorrectly()
         {
             var ship = BuildSampleHorizontalShip();
@@ -110,6 +146,24 @@ namespace BattleShips.Core.Tests
             _board.Shoot(shot);
 
             _board.Fields[shotX, shotY].State.Should().Be(FieldState.MISS);
+        }
+
+        [Fact]
+        public void Shoot_WhenShipIsMissed_ShouldReturnCorrectResult()
+        {
+            var ship = BuildSampleHorizontalShip();
+
+            var shotX = 1;
+            var shotY = 2;
+            var shot = new Point(shotX, shotY);
+
+            _board.Place(ship);
+
+            var shootResult = _board.Shoot(shot);
+
+            shootResult.State.Should().Be(FieldState.MISS);
+            shootResult.HitShipName.Should().BeNullOrEmpty();
+            shootResult.HitShipDestroyed.Should().BeFalse();
         }
 
         [Fact]
@@ -162,6 +216,7 @@ namespace BattleShips.Core.Tests
         {
             return new Ship
             {
+                Name = "Black Pearl",
                 Length = 5,
                 StartingPoint = new Point(5, 1),
                 Orientation = ShipOrientation.VERTICAL
@@ -172,7 +227,19 @@ namespace BattleShips.Core.Tests
         {
             return new Ship
             {
+                Name = "Titanic",
                 Length = 4,
+                StartingPoint = new Point(0, 0),
+                Orientation = ShipOrientation.HORIZONTAL
+            };
+        }
+
+        private Ship BuildSampleOneFieldShip()
+        {
+            return new Ship
+            {
+                Name = "Of Course I Still Love You",
+                Length = 1,
                 StartingPoint = new Point(0, 0),
                 Orientation = ShipOrientation.HORIZONTAL
             };
