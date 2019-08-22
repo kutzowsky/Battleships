@@ -1,14 +1,19 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 
 namespace Battleships.Core
 {
     public class Board
     {
         public Field[,] Fields { get; private set; }
+        public List<Ship> Ships { get; private set; }
 
         public Board()
         {
             Fields = new Field[10,10];
+            Ships = new List<Ship>();
 
             for(var i=0; i < 10; i++)
             {
@@ -39,12 +44,16 @@ namespace Battleships.Core
 
         public void Place(Ship ship)
         {
+            if (!CanPlace(ship)) throw new InvalidOperationException("This ship cannot be placed");
+
+            Ships.Add(ship);
+
             var x = ship.StartingPoint.X;
             var y = ship.StartingPoint.Y;
 
             for (var i = 0; i < ship.Length; i++)
             {
-                Fields[x, y].PlaceShip(0);
+                Fields[x, y].PlaceShip(ship.Id);
 
                 if (ship.Orientation == ShipOrientation.HORIZONTAL)
                     x++;

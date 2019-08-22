@@ -1,11 +1,13 @@
-﻿namespace Battleships.Core
+﻿using System;
+
+namespace Battleships.Core
 {
     public class Field
     {
-        public int? ShipId { get;  set; }
+        public Guid ShipId { get;  set; }
         public FieldState State { get; private set; }
 
-        public void PlaceShip(int shipId)
+        public void PlaceShip(Guid shipId)
         {
             State = FieldState.SHIP;
             ShipId = shipId;

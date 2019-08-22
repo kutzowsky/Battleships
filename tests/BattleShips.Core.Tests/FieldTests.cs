@@ -1,5 +1,6 @@
 ﻿using Battleships.Core;
 using FluentAssertions;
+using System;
 using Xunit;
 
 namespace BattleShips.Core.Tests
@@ -14,21 +15,21 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
-        public void Field_WhenInitialized_SholdHaveEmptyState()
+        public void Field_WhenInitialized_ShouldHaveEmptyState()
         {
             _field.State.Should().Be(FieldState.EMPTY);
         }
 
         [Fact]
-        public void Field_WhenInitialized_SholdHaveEmptyShipId()
+        public void Field_WhenInitialized_ShouldHaveEmptyShipId()
         {
-            _field.ShipId.Should().BeNull();
+            _field.ShipId.Should().BeEmpty();
         }
 
         [Fact]
         public void PlaceShip_WhenCalled_ShouldChangeFieldStateToShip()
         {
-            _field.PlaceShip(1);
+            _field.PlaceShip(Guid.NewGuid());
 
             _field.State.Should().Be(FieldState.SHIP);
         }
@@ -36,7 +37,7 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void PlaceShip_WhenCalled_ShouldSetProperShipId()
         {
-            var shipId = 1;
+            var shipId = Guid.NewGuid();
 
             _field.PlaceShip(shipId);
 

@@ -63,10 +63,21 @@ namespace BattleShips.Core.Tests
 
             _board.Place(ship);
 
-            _board.Fields[0, 0].ShipId.Should().NotBeNull();
-            _board.Fields[1, 0].ShipId.Should().NotBeNull();
-            _board.Fields[2, 0].ShipId.Should().NotBeNull();
-            _board.Fields[3, 0].ShipId.Should().NotBeNull();
+            _board.Fields[0, 0].ShipId.Should().Be(ship.Id);
+            _board.Fields[1, 0].ShipId.Should().Be(ship.Id);
+            _board.Fields[2, 0].ShipId.Should().Be(ship.Id);
+            _board.Fields[3, 0].ShipId.Should().Be(ship.Id);
+        }
+
+        [Fact]
+        public void Place_WhenCalled_ShouldAddShipToTheShipList()
+        {
+            var ship = BuildSampleHorizontalShip();
+
+            _board.Place(ship);
+
+            _board.Ships.Should().HaveCount(1);
+            _board.Ships.Should().Contain(ship);
         }
 
         [Fact]
