@@ -2,6 +2,7 @@
 using Battleships.Core.Interfaces;
 using FluentAssertions;
 using Moq;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -56,6 +57,36 @@ namespace BattleShips.Core.Tests
         public void BoardFields_WhenCalled_ShouldReturnBoardFields()
         {
             _game.BoardFields.Should().BeEquivalentTo(_fields);
+        }
+
+        [Fact]
+        public void Start_WhenCalled_ShouldPlaceShips()
+        {
+            var game = new Game(new Board());
+
+            game.Start();
+
+            game.Board.Ships.Should().NotBeEmpty();
+        }
+
+        [Fact]
+        public void Shoot_WhenGameIsNotActive_ShouldThrowInvalidOperationException()
+        {
+            var game = new Game(new Board());
+
+            Action act = () => game.Shoot("");
+
+            act.Should().Throw<InvalidOperationException>();
+        }
+        [Fact]
+        public void Shoot_WhenGameIsActive_ShouldNotThrow()
+        {
+            var game = new Game(new Board());
+            game.Start();
+
+            Action act = () => game.Shoot("");
+
+            act.Should().NotThrow();
         }
     }
 }

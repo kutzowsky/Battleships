@@ -1,4 +1,6 @@
-﻿namespace Battleships.Core.Interfaces
+﻿using Battleships.Core.Models;
+
+namespace Battleships.Core.Interfaces
 {
     public interface IGame
     {
@@ -10,7 +12,7 @@
 
         void Start();
 
-        void Shoot(string coordinates);
+        ShootResult Shoot(string coordinates);
 
     }
 }

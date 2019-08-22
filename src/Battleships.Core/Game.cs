@@ -1,4 +1,7 @@
 ﻿using Battleships.Core.Interfaces;
+using Battleships.Core.Models;
+using System;
+using System.Drawing;
 using System.Linq;
 
 namespace Battleships.Core
@@ -29,12 +32,22 @@ namespace Battleships.Core
 
         public void Start()
         {
-            throw new System.NotImplementedException();
+            var ship = new Ship
+            {
+                Name = "Just testing",
+                Length = 4,
+                Orientation = Enums.ShipOrientation.HORIZONTAL,
+                StartingPoint = new Point(0, 0)
+            };
+
+            if (Board.CanPlace(ship)) Board.Place(ship);
         }
 
-        public void Shoot(string coordinates)
+        public ShootResult Shoot(string coordinates)
         {
-            throw new System.NotImplementedException();
+            if (!Active) throw new InvalidOperationException("Game is not active");
+
+            return new ShootResult();
         }
     }
 }
