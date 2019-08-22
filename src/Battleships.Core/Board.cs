@@ -9,6 +9,14 @@ namespace Battleships.Core
         public Board()
         {
             Fields = new Field[10,10];
+
+            for(var i=0; i < 10; i++)
+            {
+                for (var j = 0; j < 10; j++)
+                {
+                    Fields[i, j] = new Field();
+                }
+            }
         }
 
         public void Place(Ship ship)
@@ -18,7 +26,7 @@ namespace Battleships.Core
 
             for (var i = 0; i < ship.Length; i++)
             {
-                Fields[x, y] = Field.SHIP;
+                Fields[x, y].PlaceShip(0);
 
                 if (ship.Orientation == ShipOrientation.HORIZONTAL)
                     x++;
@@ -29,10 +37,7 @@ namespace Battleships.Core
 
         public void Shoot(Point shot)
         {
-            if (Fields[shot.X, shot.Y] == Field.SHIP)
-                Fields[shot.X, shot.Y] = Field.HIT;
-            else
-                Fields[shot.X, shot.Y] = Field.MISS;
+            Fields[shot.X, shot.Y].Shoot();
         }
     }
 }

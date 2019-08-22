@@ -23,10 +23,10 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void Board_WhenInitialized_ShouldHaveEmptyFields()
         {
-            _board.Fields[0, 0].Should().Be(Field.EMPTY);
-            _board.Fields[2, 7].Should().Be(Field.EMPTY);
-            _board.Fields[5, 5].Should().Be(Field.EMPTY);
-            _board.Fields[9, 9].Should().Be(Field.EMPTY);
+            _board.Fields[0, 0].State.Should().Be(FieldState.EMPTY);
+            _board.Fields[2, 7].State.Should().Be(FieldState.EMPTY);
+            _board.Fields[5, 5].State.Should().Be(FieldState.EMPTY);
+            _board.Fields[9, 9].State.Should().Be(FieldState.EMPTY);
         }
 
         [Fact]
@@ -41,13 +41,10 @@ namespace BattleShips.Core.Tests
 
             _board.Place(ship);
 
-            _board.Fields[0, 0].Should().Be(Field.SHIP);
-            _board.Fields[1, 0].Should().Be(Field.SHIP);
-            _board.Fields[2, 0].Should().Be(Field.SHIP);
-            _board.Fields[3, 0].Should().Be(Field.SHIP);
-
-            _board.Fields[4, 0].Should().Be(Field.EMPTY);
-            _board.Fields[0, 1].Should().Be(Field.EMPTY);
+            _board.Fields[0, 0].State.Should().Be(FieldState.SHIP);
+            _board.Fields[1, 0].State.Should().Be(FieldState.SHIP);
+            _board.Fields[2, 0].State.Should().Be(FieldState.SHIP);
+            _board.Fields[3, 0].State.Should().Be(FieldState.SHIP);
         }
 
         [Fact]
@@ -62,18 +59,33 @@ namespace BattleShips.Core.Tests
 
             _board.Place(ship);
 
-            _board.Fields[5, 1].Should().Be(Field.SHIP);
-            _board.Fields[5, 2].Should().Be(Field.SHIP);
-            _board.Fields[5, 3].Should().Be(Field.SHIP);
-            _board.Fields[5, 4].Should().Be(Field.SHIP);
-            _board.Fields[5, 5].Should().Be(Field.SHIP);
-
-            _board.Fields[5, 0].Should().Be(Field.EMPTY);
-            _board.Fields[5, 6].Should().Be(Field.EMPTY);
+            _board.Fields[5, 1].State.Should().Be(FieldState.SHIP);
+            _board.Fields[5, 2].State.Should().Be(FieldState.SHIP);
+            _board.Fields[5, 3].State.Should().Be(FieldState.SHIP);
+            _board.Fields[5, 4].State.Should().Be(FieldState.SHIP);
+            _board.Fields[5, 5].State.Should().Be(FieldState.SHIP);
         }
 
         [Fact]
-        public void Shoot_OnHit_ShouldMarkPinsCorrectly()
+        public void Place_WhenCalled_ShouldSetShipIdOnAllShipFields()
+        {
+            var ship = new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(0, 0),
+                Orientation = ShipOrientation.HORIZONTAL
+            };
+
+            _board.Place(ship);
+
+            _board.Fields[0, 0].ShipId.Should().NotBeNull();
+            _board.Fields[1, 0].ShipId.Should().NotBeNull();
+            _board.Fields[2, 0].ShipId.Should().NotBeNull();
+            _board.Fields[3, 0].ShipId.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void Shoot_OnHit_ShouldMarkPinCorrectly()
         {
             var ship = new Ship
             {
@@ -90,11 +102,11 @@ namespace BattleShips.Core.Tests
 
             _board.Shoot(shot);
 
-            _board.Fields[shotX, shotY].Should().Be(Field.HIT);
+            _board.Fields[shotX, shotY].State.Should().Be(FieldState.HIT);
         }
 
         [Fact]
-        public void Shoot_OnMiss_ShouldMarkPinsCorrectly()
+        public void Shoot_OnMiss_ShouldMarkPinCorrectly()
         {
             var ship = new Ship
             {
@@ -111,7 +123,7 @@ namespace BattleShips.Core.Tests
 
             _board.Shoot(shot);
 
-            _board.Fields[shotX, shotY].Should().Be(Field.MISS);
+            _board.Fields[shotX, shotY].State.Should().Be(FieldState.MISS);
         }
     }
 }
