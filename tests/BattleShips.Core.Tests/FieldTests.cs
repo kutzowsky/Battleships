@@ -1,4 +1,5 @@
 ﻿using Battleships.Core;
+using Battleships.Core.Enums;
 using FluentAssertions;
 using System;
 using Xunit;

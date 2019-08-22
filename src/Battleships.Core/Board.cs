@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Battleships.Core.Enums;
+using Battleships.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;

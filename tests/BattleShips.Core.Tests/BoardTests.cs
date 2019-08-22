@@ -1,5 +1,6 @@
 using System.Drawing;
 using Battleships.Core;
+using Battleships.Core.Enums;
 using FluentAssertions;
 using Xunit;
 

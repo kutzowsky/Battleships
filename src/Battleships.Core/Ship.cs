@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleships.Core.Enums;
+using System;
 using System.Drawing;
 
 namespace Battleships.Core

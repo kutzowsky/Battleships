@@ -1,4 +1,6 @@
-﻿namespace Battleships.Core
+﻿using Battleships.Core.Enums;
+
+namespace Battleships.Core.Models
 {
     public class ShootResult
     {
