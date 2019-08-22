@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using Battleships.Core;
 using Battleships.Core.Enums;
@@ -80,6 +81,44 @@ namespace BattleShips.Core.Tests
 
             _board.Ships.Should().HaveCount(1);
             _board.Ships.Should().Contain(ship);
+        }
+
+        [Fact]
+        public void Place_WhenShipsOverlap_ShouldThrowInvalidOperationException()
+        {
+            var firstShip = BuildSampleHorizontalShip();
+
+            var secondShip = new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(1, 0),
+                Orientation = ShipOrientation.VERTICAL
+            };
+
+            _board.Place(firstShip);
+
+            Action act = () => _board.Place(secondShip);
+
+            act.Should().Throw<InvalidOperationException>();
+        }
+
+        [Fact]
+        public void Place_WhenShipCanBePlacedCorrectly_ShouldNotThrow()
+        {
+            var firstShip = BuildSampleHorizontalShip();
+
+            var secondShip = new Ship
+            {
+                Length = 4,
+                StartingPoint = new Point(3, 3),
+                Orientation = ShipOrientation.VERTICAL
+            };
+
+            _board.Place(firstShip);
+
+            Action act = () => _board.Place(secondShip);
+
+            act.Should().NotThrow();
         }
 
         [Fact]
@@ -180,10 +219,6 @@ namespace BattleShips.Core.Tests
                 Orientation = ShipOrientation.VERTICAL
             };
 
-            var shotX = 1;
-            var shotY = 2;
-            var shot = new Point(shotX, shotY);
-
             _board.Place(firstShip);
 
             var canPlaceShip = _board.CanPlace(secondShip);
@@ -202,10 +237,6 @@ namespace BattleShips.Core.Tests
                 StartingPoint = new Point(1, 0),
                 Orientation = ShipOrientation.VERTICAL
             };
-
-            var shotX = 1;
-            var shotY = 2;
-            var shot = new Point(shotX, shotY);
 
             _board.Place(firstShip);
 
