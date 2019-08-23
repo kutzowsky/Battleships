@@ -11,7 +11,7 @@ namespace Battleships.Core
         public IBoard Board { get; }
         public ICoordinateTranslator CoordinateTranslator { get; }
 
-        public Game(IBoard board , ICoordinateTranslator coordinateTranslator)
+        public Game(IBoard board, ICoordinateTranslator coordinateTranslator)
         {
             Board = board;
             CoordinateTranslator = coordinateTranslator;

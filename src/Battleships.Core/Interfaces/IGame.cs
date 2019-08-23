@@ -1,4 +1,5 @@
 ﻿using Battleships.Core.Models;
+using Battleships.Core.Utils.Interfaces;
 
 namespace Battleships.Core.Interfaces
 {
@@ -6,7 +7,7 @@ namespace Battleships.Core.Interfaces
     {
         IBoard Board { get; }
 
-       ICoordinateTranslator CoordinateTranslator { get; }
+        ICoordinateTranslator CoordinateTranslator { get; }
 
         bool Active { get; }
 
