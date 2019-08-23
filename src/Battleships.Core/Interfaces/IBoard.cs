@@ -11,6 +11,6 @@ namespace Battleships.Core.Interfaces
 
         bool CanPlace(IShip ship);
         void Place(IShip ship);
-        ShootResult Shoot(Point shot);
+        ShotResult Shoot(Point shot);
     }
 }

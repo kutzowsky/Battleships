@@ -17,7 +17,7 @@ namespace Battleships.Core.Interfaces
 
         void Start();
 
-        ShootResult Shoot(string coordinates);
+        ShotResult Shoot(string coordinates);
 
     }
 }

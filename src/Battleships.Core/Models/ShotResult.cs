@@ -2,9 +2,10 @@
 
 namespace Battleships.Core.Models
 {
-    public class ShootResult
-    {
-        public FieldState State { get; set; }
+    public class ShotResult
+    { 
+
+        public bool IsHit { get; set; }
 
         public string HitShipName { get; set; }
 

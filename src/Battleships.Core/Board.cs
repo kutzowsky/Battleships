@@ -68,13 +68,15 @@ namespace Battleships.Core
             }
         }
 
-        public ShootResult Shoot(Point shot)
+        public ShotResult Shoot(Point shot)
         {
             var field = Fields[shot.X, shot.Y];
             var fieldState = field.Shoot();
 
-            var result = new ShootResult();
-            result.State = fieldState;
+            var result = new ShotResult
+            {
+                IsHit = fieldState == FieldState.HIT
+            };
 
             if (fieldState == FieldState.HIT)
             {

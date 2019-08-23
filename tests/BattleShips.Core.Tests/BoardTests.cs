@@ -150,7 +150,7 @@ namespace BattleShips.Core.Tests
 
             var shootResult = _board.Shoot(shot);
 
-            shootResult.State.Should().Be(FieldState.HIT);
+            shootResult.IsHit.Should().BeTrue();
             shootResult.HitShipName.Should().Be(ship.Name);
             shootResult.HitShipDestroyed.Should().BeFalse();
         }
@@ -168,7 +168,7 @@ namespace BattleShips.Core.Tests
 
             var shootResult = _board.Shoot(shot);
 
-            shootResult.State.Should().Be(FieldState.HIT);
+            shootResult.IsHit.Should().BeTrue();
             shootResult.HitShipName.Should().Be(ship.Name);
             shootResult.HitShipDestroyed.Should().BeTrue();
         }
@@ -202,7 +202,7 @@ namespace BattleShips.Core.Tests
 
             var shootResult = _board.Shoot(shot);
 
-            shootResult.State.Should().Be(FieldState.MISS);
+            shootResult.IsHit.Should().BeFalse();
             shootResult.HitShipName.Should().BeNullOrEmpty();
             shootResult.HitShipDestroyed.Should().BeFalse();
         }

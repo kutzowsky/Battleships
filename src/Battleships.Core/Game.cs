@@ -40,7 +40,7 @@ namespace Battleships.Core
             BoardInitializer.PlaceShipsOn(Board);
         }
 
-        public ShootResult Shoot(string coordinates)
+        public ShotResult Shoot(string coordinates)
         {
             if (!Active) throw new InvalidOperationException("Game is not active");
 

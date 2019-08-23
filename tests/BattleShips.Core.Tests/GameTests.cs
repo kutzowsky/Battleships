@@ -137,9 +137,9 @@ namespace BattleShips.Core.Tests
 
             _boardMock.SetupGet(mock => mock.Ships).Returns(ships);
 
-            var expectedResult = new ShootResult
+            var expectedResult = new ShotResult
             {
-                State = FieldState.HIT,
+                IsHit = true,
                 HitShipDestroyed = true
             };
             _boardMock.Setup(mock => mock.Shoot(It.IsAny<Point>())).Returns(expectedResult);

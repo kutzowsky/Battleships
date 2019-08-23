@@ -20,7 +20,7 @@ namespace BattleShips
                 Console.WriteLine("Enter coordinates:");
                 var coords = Console.ReadLine();
 
-                ShootResult result;
+                ShotResult result;
                 try
                 {
                     result = game.Shoot(coords);
@@ -31,15 +31,15 @@ namespace BattleShips
                     continue;
                 }
 
-                if (result.State == FieldState.MISS)
-                {
-                    Console.WriteLine("Miss");
-                }
-                else
+                if (result.IsHit)
                 {
                     Console.WriteLine($"Hit! Ship: {result.HitShipName}");
 
                     if (result.HitShipDestroyed) Console.WriteLine("Sunk!");
+                }
+                else
+                {
+                    Console.WriteLine("Miss");
                 }
             }
 
