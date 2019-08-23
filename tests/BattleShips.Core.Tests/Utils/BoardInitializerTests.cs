@@ -20,8 +20,21 @@ namespace BattleShips.Core.Tests.Utils
         public BoardInitializerTests()
         {
             _shipGeneratorMock = new Mock<IShipGenerator>();
-            _shipGeneratorMock.Setup(mock => mock.CreateBattleship()).Returns(new Ship());
-            _shipGeneratorMock.Setup(mock => mock.CreateDestroyer()).Returns(new Ship());
+
+            var battleship = new Ship
+            {
+                Name = "Battleship",
+                Length = 5
+            };
+
+            var destroyer = new Ship
+            {
+                Name = "Destroyer",
+                Length = 4
+            };
+
+            _shipGeneratorMock.Setup(mock => mock.CreateBattleship()).Returns(battleship);
+            _shipGeneratorMock.Setup(mock => mock.CreateDestroyer()).Returns(destroyer);
 
             _randomDataProviderMock = new Mock<IRandomDataProvider>();
             _boardInitializer = new BoardInitializer(_shipGeneratorMock.Object, _randomDataProviderMock.Object);
@@ -40,13 +53,29 @@ namespace BattleShips.Core.Tests.Utils
         }
 
         [Fact]
-        public void PlaceShipsOn_WhenCalled_ShouldUseRandomDataProvider()
+        public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomOrientationForAllShips()
         {
             _boardInitializer.PlaceShipsOn(_boardMock.Object);
 
             _randomDataProviderMock.Verify(mock => mock.GetRandomOrientation(), Times.Exactly(3));
-            _randomDataProviderMock.Verify(mock => mock.GetRandomStartingPoint(It.IsAny<ShipOrientation>(), It.IsAny<byte>()), Times.Exactly(3));
         }
+
+        [Fact]
+        public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomStartingPointForBattleship()
+        {
+            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+
+            _randomDataProviderMock.Verify(mock => mock.GetRandomStartingPoint(It.IsAny<ShipOrientation>(), 5), Times.Once);
+        }
+
+        [Fact]
+        public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomStartingPointForDestroyers()
+        {
+            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+
+            _randomDataProviderMock.Verify(mock => mock.GetRandomStartingPoint(It.IsAny<ShipOrientation>(), 4), Times.Exactly(2));
+        }
+
 
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldPlaceThreeShipsOnTheBoard()

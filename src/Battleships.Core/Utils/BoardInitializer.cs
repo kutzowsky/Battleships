@@ -31,7 +31,7 @@ namespace Battleships.Core.Utils
                 var destroyer = ShipGenerator.CreateDestroyer();
 
                 destroyer.Orientation = RandomDataProvider.GetRandomOrientation();
-                destroyer.StartingPoint = RandomDataProvider.GetRandomStartingPoint(battleship.Orientation, battleship.Length);
+                destroyer.StartingPoint = RandomDataProvider.GetRandomStartingPoint(destroyer.Orientation, destroyer.Length);
 
                 if(board.CanPlace(destroyer))
                 {
