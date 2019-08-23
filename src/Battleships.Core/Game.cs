@@ -11,10 +11,13 @@ namespace Battleships.Core
         public IBoard Board { get; }
         public ICoordinateTranslator CoordinateTranslator { get; }
 
-        public Game(IBoard board, ICoordinateTranslator coordinateTranslator)
+        public IBoardInitializer BoardInitializer { get; }
+
+        public Game(IBoard board, ICoordinateTranslator coordinateTranslator, IBoardInitializer boardInitializer)
         {
             Board = board;
             CoordinateTranslator = coordinateTranslator;
+            BoardInitializer = boardInitializer;
         }
 
         public bool Active {
@@ -34,15 +37,7 @@ namespace Battleships.Core
 
         public void Start()
         {
-            var ship = new Ship
-            {
-                Name = "Just testing",
-                Length = 4,
-                Orientation = Enums.ShipOrientation.HORIZONTAL,
-                StartingPoint = new Point(0, 0)
-            };
-
-            if (Board.CanPlace(ship)) Board.Place(ship);
+            BoardInitializer.PlaceShipsOn(Board);
         }
 
         public ShootResult Shoot(string coordinates)

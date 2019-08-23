@@ -16,12 +16,14 @@ namespace BattleShips.Core.Tests
         IGame _game;
         readonly Mock<IBoard> _boardMock;
         readonly Mock<ICoordinateTranslator> _coordinateTranslatorMock;
+        readonly Mock<IBoardInitializer> _boardInitializerMock;
 
         public GameTests()
         {
             _boardMock = new Mock<IBoard>();
             _coordinateTranslatorMock = new Mock<ICoordinateTranslator>();
-            _game = new Game(_boardMock.Object , _coordinateTranslatorMock.Object);
+            _boardInitializerMock = new Mock<IBoardInitializer>();
+            _game = new Game(_boardMock.Object , _coordinateTranslatorMock.Object, _boardInitializerMock.Object);
         }
 
         [Fact]
@@ -74,13 +76,11 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
-        public void Start_WhenCalled_ShouldPlaceShips()
+        public void Start_WhenCalled_ShoulduseBoardInitializerToPlaceShips()
         {
-            _boardMock.Setup(mock => mock.CanPlace(It.IsAny<IShip>())).Returns(true);
-
             _game.Start();
 
-            _boardMock.Verify(mock => mock.Place(It.IsAny<IShip>()), Times.AtLeastOnce());
+            _boardInitializerMock.Verify(mock => mock.PlaceShipsOn(It.IsAny<IBoard>()), Times.Once());
         }
 
         [Fact]

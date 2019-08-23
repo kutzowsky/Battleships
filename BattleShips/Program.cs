@@ -52,7 +52,11 @@ namespace BattleShips
             var board = new Board();
             var coordinateTranslator = new CoordinateTranslator();
 
-            return new Game(board, coordinateTranslator);
+            var shipGenerator = new ShipGenerator();
+            var randomDataProvider = new RandomDataProvider();
+            var boardInitializer = new BoardInitializer(shipGenerator, randomDataProvider);
+
+            return new Game(board, coordinateTranslator, boardInitializer);
         }
     }
 }
