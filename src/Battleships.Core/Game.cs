@@ -8,7 +8,14 @@ namespace Battleships.Core
 {
     public class Game : IGame
     {
-        public IBoard Board { get; } 
+        public IBoard Board { get; }
+        public ICoordinateTranslator CoordinateTranslator { get; }
+
+        public Game(IBoard board , ICoordinateTranslator coordinateTranslator)
+        {
+            Board = board;
+            CoordinateTranslator = coordinateTranslator;
+        }
 
         public bool Active {
             get
@@ -23,11 +30,6 @@ namespace Battleships.Core
             {
                 return Board.Fields;
             }
-        }
-
-        public Game(IBoard board)
-        {
-            Board = board;
         }
 
         public void Start()
@@ -47,7 +49,8 @@ namespace Battleships.Core
         {
             if (!Active) throw new InvalidOperationException("Game is not active");
 
-            return new ShootResult();
+            var shootPoint = CoordinateTranslator.GetBoardCoordsFrom(coordinates);
+            return Board.Shoot(shootPoint);
         }
     }
 }

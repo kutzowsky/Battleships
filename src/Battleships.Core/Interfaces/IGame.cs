@@ -6,6 +6,8 @@ namespace Battleships.Core.Interfaces
     {
         IBoard Board { get; }
 
+       ICoordinateTranslator CoordinateTranslator { get; }
+
         bool Active { get; }
 
         IField[,] BoardFields { get; }
