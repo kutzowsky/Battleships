@@ -1,0 +1,44 @@
+﻿using Battleships.Core.Interfaces;
+using Battleships.Core.Utils.Interfaces;
+
+namespace Battleships.Core.Utils
+{
+    public class BoardInitializer : IBoardInitializer
+    {
+        public IShipGenerator ShipGenerator { get; }
+
+        public IRandomDataProvider RandomDataProvider { get; }
+
+        public BoardInitializer(IShipGenerator shipGenerator, IRandomDataProvider randomDataProvider)
+        {
+            ShipGenerator = shipGenerator;
+            RandomDataProvider = randomDataProvider;
+        }
+
+        public void PlaceShipsOn(IBoard board)
+        {
+            var battleship = ShipGenerator.CreateBattleship();
+
+            battleship.Orientation = RandomDataProvider.GetRandomOrientation();
+            battleship.StartingPoint = RandomDataProvider.GetRandomStartingPoint(battleship.Orientation, battleship.Length);
+
+            board.Place(battleship);
+
+            var destroyersPlaced = 0;
+
+            while (destroyersPlaced < 2)
+            {
+                var destroyer = ShipGenerator.CreateDestroyer();
+
+                destroyer.Orientation = RandomDataProvider.GetRandomOrientation();
+                destroyer.StartingPoint = RandomDataProvider.GetRandomStartingPoint(battleship.Orientation, battleship.Length);
+
+                if(board.CanPlace(destroyer))
+                {
+                    board.Place(destroyer);
+                    destroyersPlaced++;
+                }
+            }
+        }
+    }
+}
