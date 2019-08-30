@@ -5,7 +5,7 @@ using System;
 using System.Drawing;
 using Xunit;
 
-namespace BattleShips.Core.Tests.Utils
+namespace Battleships.Core.Tests.Utils
 {
     public class CoordinateTranslatorTests
     {

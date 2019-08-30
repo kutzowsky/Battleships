@@ -6,7 +6,7 @@ using Battleships.Core.Utils.Interfaces;
 using Moq;
 using Xunit;
 
-namespace BattleShips.Core.Tests.Utils
+namespace Battleships.Core.Tests.Utils
 {
     public class FleetDeployerTests
     {

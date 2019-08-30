@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using Xunit;
 
-namespace BattleShips.Core.Tests
+namespace Battleships.Core.Tests
 {
     public class GameTests
     {

@@ -6,7 +6,7 @@ using Battleships.Core.Interfaces;
 using FluentAssertions;
 using Xunit;
 
-namespace BattleShips.Core.Tests
+namespace Battleships.Core.Tests
 {
     public class BoardTests
     {
