@@ -8,12 +8,12 @@ namespace Battleships.Core.Utils
     {
         public IShip CreateBattleship()
         {
-            return CreateShip(ShipType.BATTLESHIP, 5);
+            return CreateShip(ShipType.BATTLESHIP, Settings.BATTLESHIP_LENGTH);
         }
 
         public IShip CreateDestroyer()
         {
-            return CreateShip(ShipType.DESTROYER, 4);
+            return CreateShip(ShipType.DESTROYER, Settings.DESTROYER_LENGTH);
         }
 
         private IShip CreateShip(ShipType type, byte length)

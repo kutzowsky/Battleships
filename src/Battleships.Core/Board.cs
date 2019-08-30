@@ -19,11 +19,11 @@ namespace Battleships.Core
             Ships = ships;
         }
 
-        public Board() : this(new Field[10, 10], new List<IShip>())
+        public Board() : this(new Field[Settings.BOARD_SIZE, Settings.BOARD_SIZE], new List<IShip>())
         {
-            for(var i=0; i < 10; i++)
+            for(var i=0; i < Settings.BOARD_SIZE; i++)
             {
-                for (var j = 0; j < 10; j++)
+                for (var j = 0; j < Settings.BOARD_SIZE; j++)
                 {
                     Fields[i, j] = new Field();
                 }

@@ -18,8 +18,8 @@ namespace Battleships.Core.Utils
         public Point GetRandomStartingPoint(ShipOrientation orientation, byte shipLength)
         {
             Random random = new Random();
-            var coordinate = random.Next(0, 10);
-            var lengthConstraintCoordinate = random.Next(0, 10 - shipLength);
+            var coordinate = random.Next(0, Settings.BOARD_SIZE);
+            var lengthConstraintCoordinate = random.Next(0, Settings.BOARD_SIZE - shipLength);
 
             if (orientation == ShipOrientation.HORIZONTAL)
             {

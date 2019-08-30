@@ -69,7 +69,7 @@ namespace BattleShips.Core.Tests
         [Fact]
         public void BoardFields_WhenCalled_ShouldReturnBoardFields()
         {
-            var expectedFields = new Field[10, 10];
+            var expectedFields = new Field[Settings.BOARD_SIZE, Settings.BOARD_SIZE];
             _boardMock.SetupGet(mock => mock.Fields).Returns(expectedFields);
 
             _game.BoardFields.Should().BeEquivalentTo(expectedFields);

@@ -26,7 +26,7 @@ namespace Battleships.Core.Utils
 
             var destroyersPlaced = 0;
 
-            while (destroyersPlaced < 2)
+            while (destroyersPlaced < Settings.DESTROYER_COUNT)
             {
                 var destroyer = ShipGenerator.CreateDestroyer();
 

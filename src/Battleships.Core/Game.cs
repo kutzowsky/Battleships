@@ -1,7 +1,6 @@
 ﻿using Battleships.Core.Interfaces;
 using Battleships.Core.Models;
 using System;
-using System.Drawing;
 using System.Linq;
 
 namespace Battleships.Core
