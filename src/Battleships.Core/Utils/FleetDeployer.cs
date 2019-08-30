@@ -17,13 +17,22 @@ namespace Battleships.Core.Utils
 
         public void PlaceShipsOn(IBoard board)
         {
+            PlaceBattleshipOn(board);
+            PlaceDestroyersOn(board);
+        }
+
+        private void PlaceBattleshipOn(IBoard board)
+        {
             var battleship = ShipGenerator.CreateBattleship();
 
             battleship.Orientation = RandomDataProvider.GetRandomOrientation();
             battleship.StartingPoint = RandomDataProvider.GetRandomStartingPoint(battleship.Orientation, battleship.Length);
 
             board.Place(battleship);
+        }
 
+        private void PlaceDestroyersOn(IBoard board)
+        {
             var destroyersPlaced = 0;
 
             while (destroyersPlaced < Settings.DESTROYER_COUNT)
@@ -33,7 +42,7 @@ namespace Battleships.Core.Utils
                 destroyer.Orientation = RandomDataProvider.GetRandomOrientation();
                 destroyer.StartingPoint = RandomDataProvider.GetRandomStartingPoint(destroyer.Orientation, destroyer.Length);
 
-                if(board.CanPlace(destroyer))
+                if (board.CanPlace(destroyer))
                 {
                     board.Place(destroyer);
                     destroyersPlaced++;
