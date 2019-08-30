@@ -10,6 +10,13 @@ namespace Battleships.Core
         public Guid ShipId { get;  set; }
         public FieldState State { get; private set; }
 
+        public Field() : this(FieldState.EMPTY) { }
+        
+        public Field(FieldState state)
+        {
+            State = state;
+        }
+
         public void PlaceShip(Guid shipId)
         {
             State = FieldState.SHIP;
@@ -18,7 +25,7 @@ namespace Battleships.Core
 
         public FieldState Shoot()
         {
-            if (State == FieldState.SHIP) State = FieldState.HIT;
+            if (State == FieldState.SHIP || State == FieldState.HIT) State = FieldState.HIT;
             else State = FieldState.MISS;
 
             return State;

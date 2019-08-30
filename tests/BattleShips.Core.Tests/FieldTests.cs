@@ -46,5 +46,34 @@ namespace BattleShips.Core.Tests
             _field.ShipId.Should().Be(shipId);
         }
 
+
+        [Theory]
+        [InlineData(FieldState.EMPTY, FieldState.MISS)]
+        [InlineData(FieldState.SHIP, FieldState.HIT)]
+        [InlineData(FieldState.MISS, FieldState.MISS)]
+        [InlineData(FieldState.HIT, FieldState.HIT)]
+        public void Shoot_WhenCalled_ShouldReturnNewFieldState(FieldState initialState, FieldState expectedState)
+        {
+            var field = new Field(initialState);
+
+            var returnedState = field.Shoot();
+
+            returnedState.Should().Be(expectedState);
+        }
+
+        [Theory]
+        [InlineData(FieldState.EMPTY, FieldState.MISS)]
+        [InlineData(FieldState.SHIP, FieldState.HIT)]
+        [InlineData(FieldState.MISS, FieldState.MISS)]
+        [InlineData(FieldState.HIT, FieldState.HIT)]
+        public void Shoot_WhenCalled_ShouldProperlyChangeFieldState(FieldState initialState, FieldState expectedState)
+        {
+            var field = new Field(initialState);
+
+            var returnedState = field.Shoot();
+
+            field.State.Should().Be(expectedState);
+        }
+
     }
 }
