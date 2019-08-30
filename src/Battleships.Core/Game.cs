@@ -10,13 +10,13 @@ namespace Battleships.Core
         public IBoard Board { get; }
         public ICoordinateTranslator CoordinateTranslator { get; }
 
-        public IBoardInitializer BoardInitializer { get; }
+        public IFleetDeployer  FleetDeployer { get; }
 
-        public Game(IBoard board, ICoordinateTranslator coordinateTranslator, IBoardInitializer boardInitializer)
+        public Game(IBoard board, ICoordinateTranslator coordinateTranslator, IFleetDeployer  fleetDeployer)
         {
             Board = board;
             CoordinateTranslator = coordinateTranslator;
-            BoardInitializer = boardInitializer;
+            FleetDeployer = fleetDeployer;
         }
 
         public bool Active {
@@ -36,7 +36,7 @@ namespace Battleships.Core
 
         public void Start()
         {
-            BoardInitializer.PlaceShipsOn(Board);
+            FleetDeployer.PlaceShipsOn(Board);
         }
 
         public ShotResult Shoot(string coordinates)

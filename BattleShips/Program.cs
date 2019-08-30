@@ -32,9 +32,9 @@ namespace BattleShips
 
             var shipGenerator = new ShipGenerator();
             var randomDataProvider = new RandomDataProvider();
-            var boardInitializer = new BoardInitializer(shipGenerator, randomDataProvider);
+            var fleetDeployer = new FleetDeployer(shipGenerator, randomDataProvider);
 
-            return new Game(board, coordinateTranslator, boardInitializer);
+            return new Game(board, coordinateTranslator, fleetDeployer);
         }
 
         private static void DisplayLegend()

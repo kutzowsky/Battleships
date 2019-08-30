@@ -8,16 +8,16 @@ using Xunit;
 
 namespace BattleShips.Core.Tests.Utils
 {
-    public class BoardInitializerTests
+    public class FleetDeployerTests
     {
-        IBoardInitializer _boardInitializer;
+        IFleetDeployer  _fleetDeployer;
 
         readonly Mock<IShipGenerator> _shipGeneratorMock;
         readonly Mock<IRandomDataProvider> _randomDataProviderMock;
 
         readonly Mock<IBoard> _boardMock;
 
-        public BoardInitializerTests()
+        public FleetDeployerTests()
         {
             _shipGeneratorMock = new Mock<IShipGenerator>();
 
@@ -37,7 +37,7 @@ namespace BattleShips.Core.Tests.Utils
             _shipGeneratorMock.Setup(mock => mock.CreateDestroyer()).Returns(destroyer);
 
             _randomDataProviderMock = new Mock<IRandomDataProvider>();
-            _boardInitializer = new BoardInitializer(_shipGeneratorMock.Object, _randomDataProviderMock.Object);
+            _fleetDeployer = new FleetDeployer(_shipGeneratorMock.Object, _randomDataProviderMock.Object);
 
             _boardMock = new Mock<IBoard>();
             _boardMock.Setup(mock => mock.CanPlace(It.IsAny<IShip>())).Returns(true);
@@ -46,7 +46,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldUseShipGenerator()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _shipGeneratorMock.Verify(mock => mock.CreateBattleship(), Times.Once);
             _shipGeneratorMock.Verify(mock => mock.CreateDestroyer(), Times.Exactly(2));
@@ -55,7 +55,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomOrientationForAllShips()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _randomDataProviderMock.Verify(mock => mock.GetRandomOrientation(), Times.Exactly(3));
         }
@@ -63,7 +63,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomStartingPointForBattleship()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _randomDataProviderMock.Verify(mock => mock.GetRandomStartingPoint(It.IsAny<ShipOrientation>(), 5), Times.Once);
         }
@@ -71,7 +71,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldUseGetRandomStartingPointForDestroyers()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _randomDataProviderMock.Verify(mock => mock.GetRandomStartingPoint(It.IsAny<ShipOrientation>(), 4), Times.Exactly(2));
         }
@@ -80,7 +80,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_ShouldPlaceThreeShipsOnTheBoard()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _boardMock.Verify(mock => mock.Place(It.IsAny<IShip>()), Times.Exactly(3));
         }
@@ -88,7 +88,7 @@ namespace BattleShips.Core.Tests.Utils
         [Fact]
         public void PlaceShipsOn_WhenCalled_CheckIfItCanPlaceSecondAndThirdShip()
         {
-            _boardInitializer.PlaceShipsOn(_boardMock.Object);
+            _fleetDeployer.PlaceShipsOn(_boardMock.Object);
 
             _boardMock.Verify(mock => mock.CanPlace(It.IsAny<IShip>()), Times.Exactly(2));
         }

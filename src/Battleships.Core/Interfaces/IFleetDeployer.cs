@@ -2,7 +2,7 @@
 
 namespace Battleships.Core.Interfaces
 {
-    public interface IBoardInitializer
+    public interface IFleetDeployer
     {
         IShipGenerator ShipGenerator { get; }
 

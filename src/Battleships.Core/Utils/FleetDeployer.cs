@@ -3,13 +3,13 @@ using Battleships.Core.Utils.Interfaces;
 
 namespace Battleships.Core.Utils
 {
-    public class BoardInitializer : IBoardInitializer
+    public class FleetDeployer : IFleetDeployer 
     {
         public IShipGenerator ShipGenerator { get; }
 
         public IRandomDataProvider RandomDataProvider { get; }
 
-        public BoardInitializer(IShipGenerator shipGenerator, IRandomDataProvider randomDataProvider)
+        public FleetDeployer(IShipGenerator shipGenerator, IRandomDataProvider randomDataProvider)
         {
             ShipGenerator = shipGenerator;
             RandomDataProvider = randomDataProvider;

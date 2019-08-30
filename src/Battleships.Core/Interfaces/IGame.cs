@@ -9,7 +9,7 @@ namespace Battleships.Core.Interfaces
 
         ICoordinateTranslator CoordinateTranslator { get; }
 
-        IBoardInitializer BoardInitializer { get; }
+        IFleetDeployer FleetDeployer { get; }
 
         bool Active { get; }
 
