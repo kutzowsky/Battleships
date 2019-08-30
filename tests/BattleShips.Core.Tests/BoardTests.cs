@@ -151,7 +151,7 @@ namespace BattleShips.Core.Tests
             var shootResult = _board.Shoot(shot);
 
             shootResult.IsHit.Should().BeTrue();
-            shootResult.HitShipName.Should().Be(ship.Name);
+            shootResult.HitShipType.Should().Be(ship.Type);
             shootResult.HitShipDestroyed.Should().BeFalse();
         }
 
@@ -169,7 +169,7 @@ namespace BattleShips.Core.Tests
             var shootResult = _board.Shoot(shot);
 
             shootResult.IsHit.Should().BeTrue();
-            shootResult.HitShipName.Should().Be(ship.Name);
+            shootResult.HitShipType.Should().Be(ship.Type);
             shootResult.HitShipDestroyed.Should().BeTrue();
         }
 
@@ -203,7 +203,7 @@ namespace BattleShips.Core.Tests
             var shootResult = _board.Shoot(shot);
 
             shootResult.IsHit.Should().BeFalse();
-            shootResult.HitShipName.Should().BeNullOrEmpty();
+            shootResult.HitShipType.Should().BeNull();
             shootResult.HitShipDestroyed.Should().BeFalse();
         }
 
@@ -249,7 +249,7 @@ namespace BattleShips.Core.Tests
         {
             return new Ship
             {
-                Name = "Black Pearl",
+                Type = ShipType.BATTLESHIP,
                 Length = 5,
                 StartingPoint = new Point(5, 1),
                 Orientation = ShipOrientation.VERTICAL
@@ -260,7 +260,7 @@ namespace BattleShips.Core.Tests
         {
             return new Ship
             {
-                Name = "Titanic",
+                Type = ShipType.DESTROYER,
                 Length = 4,
                 StartingPoint = new Point(0, 0),
                 Orientation = ShipOrientation.HORIZONTAL
@@ -271,7 +271,6 @@ namespace BattleShips.Core.Tests
         {
             return new Ship
             {
-                Name = "Of Course I Still Love You",
                 Length = 1,
                 StartingPoint = new Point(0, 0),
                 Orientation = ShipOrientation.HORIZONTAL

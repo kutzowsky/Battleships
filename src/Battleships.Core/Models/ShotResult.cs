@@ -7,7 +7,7 @@ namespace Battleships.Core.Models
 
         public bool IsHit { get; set; }
 
-        public string HitShipName { get; set; }
+        public ShipType? HitShipType { get; set; }
 
         public bool HitShipDestroyed { get; set; }
     }

@@ -23,13 +23,13 @@ namespace BattleShips.Core.Tests.Utils
 
             var battleship = new Ship
             {
-                Name = "Battleship",
+                Type = ShipType.BATTLESHIP,
                 Length = 5
             };
 
             var destroyer = new Ship
             {
-                Name = "Destroyer",
+                Type = ShipType.DESTROYER,
                 Length = 4
             };
 

@@ -8,7 +8,7 @@ namespace Battleships.Core
     public class Ship : IShip
     {
         public Guid Id { get; private set; }
-        public string Name { get; set; }
+        public ShipType Type { get; set; }
         public Point StartingPoint { get; set; }
         public byte Length { get; set; }
 

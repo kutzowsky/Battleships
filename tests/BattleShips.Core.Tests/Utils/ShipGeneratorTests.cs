@@ -1,4 +1,5 @@
-﻿using Battleships.Core.Utils.Interfaces;
+﻿using Battleships.Core.Enums;
+using Battleships.Core.Utils.Interfaces;
 using FluentAssertions;
 using Xunit;
 
@@ -18,7 +19,7 @@ namespace Battleships.Core.Utils
         {
             var destroyer = _shipGenerator.CreateDestroyer();
 
-            destroyer.Name.Should().Be("Destroyer");
+            destroyer.Type.Should().Be(ShipType.DESTROYER);
             destroyer.Length.Should().Be(4);
         }
 
@@ -27,7 +28,7 @@ namespace Battleships.Core.Utils
         {
             var battleship = _shipGenerator.CreateBattleship();
 
-            battleship.Name.Should().Be("Battleship");
+            battleship.Type.Should().Be(ShipType.BATTLESHIP);
             battleship.Length.Should().Be(5);
         }
     }

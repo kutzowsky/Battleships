@@ -33,7 +33,7 @@ namespace BattleShips
 
                 if (result.IsHit)
                 {
-                    Console.WriteLine($"Hit! Ship: {result.HitShipName}");
+                    Console.WriteLine($"Hit! Ship: {result.HitShipType}");
 
                     if (result.HitShipDestroyed) Console.WriteLine("Sunk!");
                 }

@@ -86,7 +86,7 @@ namespace Battleships.Core
                 ship.Hit();
 
                 result.HitShipDestroyed = ship.Destroyed;
-                result.HitShipName = ship.Name;
+                result.HitShipType = ship.Type;
             }
 
             return result;

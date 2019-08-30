@@ -9,7 +9,7 @@ namespace Battleships.Core.Interfaces
         bool Destroyed { get; }
         Guid Id { get; }
         byte Length { get; set; }
-        string Name { get; set; }
+        ShipType Type { get; set; }
         ShipOrientation Orientation { get; set; }
         Point StartingPoint { get; set; }
 
