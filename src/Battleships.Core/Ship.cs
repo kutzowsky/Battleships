@@ -23,7 +23,7 @@ namespace Battleships.Core
 
         public void Hit()
         {
-            Length--;
+            if (Length > 0) Length--;
         }
     }
 }

@@ -34,6 +34,19 @@ namespace BattleShips.Core.Tests
         }
 
         [Fact]
+        public void Hit_WhenCalledAndShipLengthIsZero_ShouldLeaveItAsZero()
+        {
+            var ship = new Ship
+            {
+                Length = 0
+            };
+
+            ship.Hit();
+
+            ship.Length.Should().Be(0);
+        }
+
+        [Fact]
         public void Destroyed_WhenShipLengthIsZero_ShouldReturnTrue()
         {
             var ship = new Ship
