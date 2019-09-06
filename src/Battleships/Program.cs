@@ -55,15 +55,23 @@ namespace BattleShips
                 Console.WriteLine("Enter coordinates:");
                 var coords = Console.ReadLine();
 
-                ShotResult result;
+                ShotResult result = null;
                 try
                 {
                     result = game.Shoot(coords);
                 }
-                catch (ArgumentException exc)
+                catch (Exception exc)
                 {
-                    Console.WriteLine($"Error! {exc.Message} Try again.");
-                    continue;
+                    if (exc is ArgumentException || exc is InvalidOperationException)
+                    {
+                        Console.WriteLine($"Error! {exc.Message} Try again.");
+                        continue;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Critical error! {exc.Message} Closing application.");
+                        Environment.Exit(1);
+                    }
                 }
 
                 if (result.IsHit)

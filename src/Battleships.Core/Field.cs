@@ -25,7 +25,9 @@ namespace Battleships.Core
 
         public FieldState Shoot()
         {
-            if (State == FieldState.SHIP || State == FieldState.HIT) State = FieldState.HIT;
+            if (State == FieldState.HIT || State == FieldState.MISS) throw new InvalidOperationException("Field shot already");
+
+            if (State == FieldState.SHIP) State = FieldState.HIT;
             else State = FieldState.MISS;
 
             return State;
